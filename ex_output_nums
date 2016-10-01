@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+##############################################
+# Author: Rhys Campbell                      #
+# Created: 2016-10-01                        #
+# Description: A simple command-line tool to #
+# generate a sequence of ten numbers from 0  #
+# or the number provided as an agrument or   #
+# from stdin.                                #
+############################################## 
+import sys, select
+
+num = None
+
+if len(sys.argv)>1:
+	num = sys.argv[1] # take the argument provided
+else:
+	if select.select([sys.stdin,],[],[],0.0)[0]:
+		num = sys.stdin.read() # take the piped input
+	if num is None:
+		num = 0
+try:
+	num = int(num)
+except TypeError:
+	sys.stderr.write("Input is not an integer.\n")
+	sys.exit(1)
+
+for i in range(num, num+10):
+	print i
+
+
