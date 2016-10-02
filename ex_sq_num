@@ -7,7 +7,7 @@
 # or the number provided as an agrument or   #
 # from stdin.                                #
 ############################################## 
-import sys
+import sys, select
 
 nums = []
 
@@ -15,16 +15,15 @@ if len(sys.argv)>1:
 	nums = [sys.argv[1]] # take the argument provided
 else:
 	# take the piped input
-	for line in sys.stdin:
-		nums.append(line)
-	if nums is None:
-		nums = [0]	
+    for line in sys.stdin:
+        nums.append(line)
+    if len(nums) == 0:
+        nums.append(1)
 for num in nums:
-	try:
-		num = int(num)
-	except TypeError:
-		sys.stderr.write("Input is not an integer.\n")
-		sys.exit(1)
-	print num * num
-
+    try:
+	    num = int(num)
+    except TypeError:
+        sys.stderr.write("Input is not an integer.\n")
+        sys.exit(1)
+    print num * num
 
