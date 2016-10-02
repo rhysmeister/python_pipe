@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+##############################################
+# Author: Rhys Campbell                      #
+# Created: 2016-10-02                        #
+# Description: A quick example using the     #
+# click module.                              #
+##############################################
+
+import click
+
+click.echo("Hello World", bg="green", fg="red", blink=True)
