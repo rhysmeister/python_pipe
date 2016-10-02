@@ -6,6 +6,21 @@
 # click module.                              #
 ##############################################
 
-import click
+import click, time
 
-click.echo("Hello World", bg="green", fg="red", blink=True)
+@click.command()
+@click.option("--name", prompt='Your name', help='The person to greet.')
+@click.option("--repeat", default=1, help="Number of times to execute")
+@click.option("--flash", default=False, help="Enable blink")
+
+def exec_prog(name, repeat, flash):
+    click.secho("Hello World", bg="green", fg="red", blink=flash)
+
+    with click.progressbar(length=10, label="My Progress") as pb:
+        for i in range(0, 10):
+            pb.update(1)
+            time.sleep(1)
+    click.pause()
+
+if __name__ == '__main__':
+    exec_prog()
